@@ -22,7 +22,7 @@ def Count(crypto, label):
         # SOLUSDT -> ['SOL', '']
         symbol = split_symbol[0]    # отримати першу частину з розділеного слова (SOL) 
 
-        #data['symbol']
+ 
 
         return f"{symbol} {round(float(data['price']), 4)}$ USD/USDT"
    
