@@ -25,5 +25,4 @@ def Count(crypto, label):
         #data['symbol']
 
         return f"{symbol} {round(float(data['price']), 4)}$ USD/USDT"
-    #else:
-        #label.text = "Price:"
+   
