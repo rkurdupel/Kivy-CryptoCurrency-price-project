@@ -58,16 +58,17 @@ class ConvertScreen(Screen):
 
         usd = Label(text = "How many USD do you have?", font_size = "23sp", pos_hint = {"x": -0.3, "y": 0.1})
 
-        self.usd_sum = TextInput(hint_text = "Write the amount of USD which you have", multiline = False, size_hint = (0.4, None), height = 30, pos_hint = {"x": 0, "y": 0.5})
+        self.usd_sum = TextInput(hint_text = "Write the amount of USD which you have", multiline = False, size_hint = (0.4, 0.1), height = 30, pos_hint = {"x": 0, "y": 0.45})
 
         crypto_ask = Label(text = "Which cryptocurrency do you want? Write name of cryptocurrency + USDT (ETHUSDT)", font_size = "15sp", pos_hint = {"x": -0.13, "y": -0.09})
 
-        self.crypto_entry = TextInput(hint_text = "Put down the name of the cryptocurrency you want", multiline = False, size_hint = (0.45, None), height = 30, pos_hint = {"x": 0, "y": 0.3})
+        self.crypto_entry = TextInput(hint_text = "Put down the name of the cryptocurrency you want", size_hint = (0.4, 0.1), height = 30, pos_hint = {"x": 0, "y": 0.3})
 
         self.you_can_get = Label(text = "You can buy:", font_size = "30sp", pos_hint = {"y": -0.4, "x": -0.1})
         # TextInput - пустий видимий рядок в якому можна писати
 
         back_button = ScreenButton(self, direction = "right", goal = "main", text = "<--- Back",size_hint = (0.3, 0.1), pos_hint = {"x": 0.7, "y": 0.28})
+        refresh_button = Button(text="Refresh data", size_hint=(0.3, 0.1), pos_hint={"x": 0.7, "y": 0.5})
 
         self.add_widget(label)
         self.add_widget(convert_image)
@@ -77,11 +78,22 @@ class ConvertScreen(Screen):
         self.add_widget(self.crypto_entry)
         self.add_widget(self.you_can_get)
         self.add_widget(back_button)
+        self.add_widget(refresh_button)     # Добавити всі об'єкти на екран за допомогою add_widget()
+
+        refresh_button.bind(on_press=self.refresh)
 
         self.crypto_entry.bind(text = self.how_many_can_you_buy)
 
+    def refresh(self, *args):
+        try:        # спробувати очистити дані в видимому рядку
+            self.usd_sum.text = ""
+            self.crypto_entry.text = "" # crypto_entry.text має бути на першому місці бо в usd_sum виконується змінювання типу з string (str) в float
+        except ValueError: # при помилці ValueEror (помилка значення) надрукувати 76
+            print(76)   # надрукувати 76
+
+
     def how_many_can_you_buy(self, *args):  # *args - приймає безліч неіменованих аргументів (5, "grghr", 64645") та повертає в вигляді кортежу ()
-        get_usd = float(self.usd_sum.text)
+        get_usd = float(self.usd_sum.text)  # перевести дані які користувач ввів в рядку з string в float (число з крапкою)
         data = self.crypto_entry.text.upper()   # upper() - переводе всі букви з маленьких в великі (pow -> POW)
 
         try:
@@ -115,6 +127,7 @@ class GetCryptoPrice(Screen):
 
         back_button = ScreenButton(self,direction = "right", goal = "main", text = "<-- Back", size_hint = (0.3, 0.1),  pos_hint = {"x": 0.7, "y":0})
 
+
         #v1 = BoxLayout(orientation = "vertical")
         #v1.add_widget(label)
         #v1.add_widget(image)
@@ -127,6 +140,7 @@ class GetCryptoPrice(Screen):
         self.add_widget(self.entry) 
         self.add_widget(self.result)
         self.add_widget(back_button)     # Добавити всі об'єкти на екран за допомогою add_widget()
+
 
         self.entry.bind(text = self.count)  # bind допомагає задіяти певному об'єкту виконання (при введені інформації в видимий рядок - виконується функція count)
 
