@@ -16,7 +16,7 @@ def Count(crypto, label):
     if len(crypto) > 6:
         data = requests.get(url = key, params = parameters)
         data = data.json()
-        print(f"{data['symbol']} price is {data['price']}")
+        #print(f"{data['symbol']} price is {data['price']}")
 
         split_symbol = data['symbol'].split('USDT') # розділити слово на дві частини перед USDT та після USDT, результат в вигляді списку
         # SOLUSDT -> ['SOL', '']
