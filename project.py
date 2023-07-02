@@ -177,7 +177,7 @@ class GetCryptoPrice(Screen):
         label = Label(text = "Discover the price of crypto", font_size = "50sp", pos_hint = {"x": 0, "y": 0.4}, font_style = "H1")
         image = Image(source = "list_of_cryptoo.png", size_hint = (1, 0.5), pos_hint = {"x": 0, "y": 0.33})
         label2 = Label(text = "Put down short name of cryptocurrency + USDT (BTCUSDT)", pos_hint = {"x": 0, "y": -0.2}, font_style = "Subtitle1")
-        self.entry = TextInput(hint_text = "Write info here", multiline = False, size_hint = (0.3, None), pos_hint = {"x": 0, "y": 0.23}, height = "30sp", halign = "center")  # halign = "center" - розміщує текст всередині надпису посередині, перше слово починається з центру писатись
+        self.entry = TextInput(hint_text = "Write info here", multiline = True, size_hint = (0.3, None), pos_hint = {"x": 0, "y": 0.23}, height = "30sp", halign = "center")  # halign = "center" - розміщує текст всередині надпису посередині, перше слово починається з центру писатись
         # height - задати висоту рядка, size_hint = (0,5, None) 0.5 - розмір по (x), None - розмір по (y)
         # None - 0 може бути розмір або координати певного об'єкта
         # multiline = False - щоб вся введена користувачем інформацію в видимому рядку була в один рядок
@@ -185,7 +185,7 @@ class GetCryptoPrice(Screen):
         self.result = Label(text = 'Price:', font_size = "24sp", pos_hint = {'x': 0, 'y': -0.3})
 
         back_button = ScreenButton(self,direction = "right", goal = "main", text = "<-- Back", size_hint = (0.3, 0.1),  pos_hint = {"x": 0.7, "y":0})
-
+        # goal = "main" - when button is pressed screen will be changed from getcryptoprice to main
 
         #v1 = BoxLayout(orientation = "vertical")
         #v1.add_widget(label)
@@ -249,7 +249,7 @@ class MyApp(App):
     def change_style(self, *args):  # функція для зміну теми програми
         if self.theme_cls.theme_style == "Dark":    # якщо тема програми чорна - змінити тему на світлу, та задати колір об'єктам жовтий
             self.theme_cls.theme_style = "Light"
-            self.theme_cls.primary_palette = "Yellow"
+            self.theme_cls.primary_palette = "Amber"
 
         elif self.theme_cls.theme_style == "Light": # якщо тема програми світла - змінити на чорну, задати колір об'єктам синій та задати відтінок
             self.theme_cls.theme_style = "Dark"
